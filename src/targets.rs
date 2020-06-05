@@ -424,6 +424,7 @@ pub enum OperatingSystem {
     Netbsd,
     None_,
     Openbsd,
+    OpTee,
     Psp,
     Redox,
     Solaris,
@@ -463,6 +464,7 @@ pub enum Environment {
     Sgx,
     Softfloat,
     Spe,
+    TrustZone
 }
 
 /// The "binary format" field, which is usually omitted, and the binary format
@@ -996,7 +998,8 @@ impl fmt::Display for OperatingSystem {
             Self::Netbsd => "netbsd",
             Self::None_ => "none",
             Self::Openbsd => "openbsd",
-            Self::Psp => "psp",
+            Self::OpTee => "optee",
+	    Self::Psp => "psp",
             Self::Redox => "redox",
             Self::Solaris => "solaris",
             Self::Uefi => "uefi",
@@ -1064,6 +1067,7 @@ impl FromStr for OperatingSystem {
             "netbsd" => Self::Netbsd,
             "none" => Self::None_,
             "openbsd" => Self::Openbsd,
+	    "optee" => Self::OpTee,
             "psp" => Self::Psp,
             "redox" => Self::Redox,
             "solaris" => Self::Solaris,
@@ -1102,6 +1106,7 @@ impl fmt::Display for Environment {
             Self::Sgx => "sgx",
             Self::Softfloat => "softfloat",
             Self::Spe => "spe",
+	    Self::TrustZone => "trustzone"
         };
         f.write_str(s)
     }
@@ -1135,6 +1140,7 @@ impl FromStr for Environment {
             "sgx" => Self::Sgx,
             "softfloat" => Self::Softfloat,
             "spe" => Self::Spe,
+	    "trustzone" => Self::TrustZone,
             _ => return Err(()),
         })
     }
@@ -1194,6 +1200,7 @@ mod tests {
             "aarch64-unknown-none-softfloat",
             "aarch64-unknown-openbsd",
             "aarch64-unknown-redox",
+	    "aarch64-unknown-optee-trustzone",
             "aarch64-uwp-windows-msvc",
             "aarch64-wrs-vxworks",
             "amdgcn-amd-amdhsa",
